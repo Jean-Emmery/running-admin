@@ -1,0 +1,15 @@
+a:hover {
+    color: #ff364f !important;
+}
+
+.kdpDOy {
+    color: #fff !important;
+}
+
+.kdpDOy:hover {
+    color: #ff364f !important;
+    background-color: #fff !important;
+    border-color: #ff364f !important;
+    -webkit-box-shadow: 1px 1px 8px 1px #FF364F !important;
+    text-decoration: none;
+}
