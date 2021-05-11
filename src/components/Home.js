@@ -23,17 +23,17 @@ export default class Home extends Component {
     this.getUsersFromDb();
     this.getEntitiesFromDb();
   }
-  
+
   setUsers(users) {
-    this.setState({users});
+    this.setState({ users });
   }
 
   setEntities(entities) {
-    this.setState({entities});
+    this.setState({ entities });
   }
 
   setUserEntities(userEntities) {
-    this.setState({userEntities});
+    this.setState({ userEntities });
   }
 
   getUsers() {
@@ -44,91 +44,93 @@ export default class Home extends Component {
     return this.state.entities;
   }
 
- getUsersFromDb = () => {
-   let me = this;
-   
-   const UsersCollection = db.collection('users');
-   const UserQuery = UsersCollection.get().then((query) => {
-    const data = query.docs.map((doc) => doc.data());
-    me.setUsers(data);
-  });
-}
+  getUsersFromDb = () => {
+    let me = this;
 
-getEntitiesFromDb = () => {
-  let me = this;
-  
-  const EntitiesCollection = db.collection('entities');
-  const EntitiesQuery = EntitiesCollection.get().then((query) => {
-   const data = query.docs.map((doc) => doc.data());
-   me.setEntities(data);
- });
-}
+    const UsersCollection = db.collection('users');
+    const UserQuery = UsersCollection.get().then((query) => {
+      const data = query.docs.map((doc) => doc.data());
+      me.setUsers(data);
+    });
+  }
 
-getUserEntities(userId) {
-  console.log("getUserEntities: -start")
-  let entities = this.getEntities();
-  let userEntity = {};
-  let sortedEntities = [];
+  getEntitiesFromDb = () => {
+    let me = this;
 
-  entities.map((entity) => {
-    if (entity.authorID == userId) {
-      userEntity.createdAt = new Date(entity.createdAt.seconds).getTime();
-      userEntity.distance = 12;
-      userEntity.chrono = 12;
-      userEntity.text = entity.text;
-      sortedEntities.push(userEntity);
-    }
-  });
+    const EntitiesCollection = db.collection('entities');
+    const EntitiesQuery = EntitiesCollection.get().then((query) => {
+      const data = query.docs.map((doc) => doc.data());
+      me.setEntities(data);
+    });
+  }
 
-  console.log("getUserEntities: -end", sortedEntities)
-  return (
-    <div>
-      {sortedEntities.map((entity, index) => {
-        return (
+  getUserEntities(userId) {
+    console.log("getUserEntities: -start")
+    let entities = this.getEntities();
+    let sortedEntities = [];
 
-<Accordion>
-  <Card>
-    <Card.Header className="accordion_header">
-      <Accordion.Toggle as={Button} className="accordion_title" variant="link" eventKey="0" key={index}>
-          Course du : {entity.createdAt}
-      </Accordion.Toggle>
-    </Card.Header>
-    <Accordion.Collapse eventKey="0">
-      <Card.Body>
-          <p>distance: {entity.distance}</p>
-          <p>chrono: {entity.chrono}</p>
-          <p>text: {entity.text}</p>
-      </Card.Body>
-    </Accordion.Collapse>
-  </Card>
-</Accordion>
-        )}
-        )}
-    </div>
-  );
-}
+    entities.map((entity) => {
 
-render() {
-  let users = this.getUsers();
-  console.log("Render -start");
+      if (entity.authorID == userId) {
+        let userEntity = {};
+        userEntity.createdAt = (new Date(entity.createdAt.seconds * 1000)).toLocaleDateString();
+        userEntity.distance = 12;
+        userEntity.chrono = 12;
+        userEntity.text = entity.text;
+        sortedEntities.push(userEntity);
+      }
+    });
+
+    console.log("getUserEntities: -end", sortedEntities)
     return (
-        <div className="list-row">
+      <div>
+        {sortedEntities.map((entity) => {
+          return (
+            <Accordion key={entity.createdAt}>
+              <Card>
+                <Card.Header className="accordion_header">
+                  <Accordion.Toggle as={Button} className="accordion_title" variant="link" eventKey="0">
+                    Course du : {entity.createdAt}
+                  </Accordion.Toggle>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body>
+                    <p>distance: {entity.distance}</p>
+                    <p>chrono: {entity.chrono}</p>
+                    <p>text: {entity.text}</p>
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
+          )
+        }
+        )}
+      </div>
+    );
+  }
+
+  render() {
+    let users = this.getUsers();
+    console.log("Render -start");
+    return (
+      <div className="list-row">
         {users &&
           users.map((user) => {
-            return(
-            <Card className="users-container" key={user.id}>
-              <Card.Body>
-                {/*<Card.Title>EMAIL: {user.email}</Card.Title>*/}
-                <Card.Title className="title_fullname">{user.fullName}</Card.Title>
-                {/*<Card.Title>ID: {user.id}</Card.Title>*/}
-                {this.getUserEntities(user.id)}
-                <Button className="button_update" variant="warning">UPDATE</Button>
-                <Button className="button_delete" variant="danger">DELETE</Button>
-              </Card.Body>
-            </Card>
-            )}
-          )}  
-        </div>
-  );
-}
+            return (
+              <Card className="users-container" key={user.id}>
+                <Card.Body>
+                  {/*<Card.Title>EMAIL: {user.email}</Card.Title>*/}
+                  <Card.Title className="title_fullname">{user.fullName}</Card.Title>
+                  {/*<Card.Title>ID: {user.id}</Card.Title>*/}
+                  {this.getUserEntities(user.id)}
+                  <Button className="button_update" variant="warning">UPDATE</Button>
+                  <Button className="button_delete" variant="danger">DELETE</Button>
+                </Card.Body>
+              </Card>
+            )
+          }
+          )}
+      </div>
+    );
+  }
 }
