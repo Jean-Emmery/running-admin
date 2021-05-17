@@ -1,18 +1,21 @@
+body {
+    background-color: whitesmoke;
+}
 .container {
     margin-top: 5%;
 }
 
 .con-button {
-    background-color: #ff364f !important;
+    background-color: #4374E6 !important;
     border-color: whitesmoke !important;
 }
 
 .btn-primary.focus, .btn-primary:focus {
-    color: #ff364f !important;
+    color: #4374E6 !important;
     background-color: #fff !important;
-    border-color: #ff364f !important;
-    -webkit-box-shadow: 1px 1px 8px 1px #FF364F !important; 
-    box-shadow: 1px 1px 8px 1px #FF364F !important;
+    border-color: #4374E6 !important;
+    -webkit-box-shadow: 1px 1px 8px 1px #4374E6 !important; 
+    box-shadow: 1px 1px 8px 1px #4374E6 !important;
 }
 
 .btn-link {
@@ -31,8 +34,8 @@
 
 .list-row {
     display : flex;
-    justify-content: space-around;
     margin-top: 1%;
+    flex-wrap: wrap;
 }
 
 .button_update {
@@ -50,9 +53,9 @@
 }
 
 .accordion_header {
-    background-color: #ff364f !important;
-    -webkit-box-shadow: 1px 1px 8px 1px #FF364F !important; 
-    box-shadow: 1px 1px 8px 1px #FF364F !important;
+    background-color: #4374E6 !important;
+    -webkit-box-shadow: 1px 1px 8px 1px #4374E6 !important; 
+    box-shadow: 1px 1px 8px 1px #4374E6 !important;
 }
 
 .title_fullname {
@@ -65,3 +68,21 @@
     font-weight: 400;
     font-family: "Raleway",sans-serif;
 }
+
+.red-zone {
+    height: 230px;
+    overflow: auto;
+}
+
+body::-webkit-scrollbar {
+    width: 1em;
+  }
+   
+  body::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+   
+  body::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+  }

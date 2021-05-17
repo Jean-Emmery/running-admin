@@ -57,7 +57,7 @@ export default class Home extends Component {
   getEntitiesFromDb = () => {
     let me = this;
 
-    const EntitiesCollection = db.collection('entities');
+    const EntitiesCollection = db.collection('courses');
     const EntitiesQuery = EntitiesCollection.get().then((query) => {
       const data = query.docs.map((doc) => doc.data());
       me.setEntities(data);
@@ -70,20 +70,19 @@ export default class Home extends Component {
     let sortedEntities = [];
 
     entities.map((entity) => {
-
-      if (entity.authorID == userId) {
+      if (entity.userID == userId) {
         let userEntity = {};
         userEntity.createdAt = (new Date(entity.createdAt.seconds * 1000)).toLocaleDateString();
-        userEntity.distance = 12;
-        userEntity.chrono = 12;
-        userEntity.text = entity.text;
+        userEntity.distance = entity.distance;
+        userEntity.chrono = entity.timer;
+        userEntity.text = entity.nombreDePas;
         sortedEntities.push(userEntity);
       }
     });
 
     console.log("getUserEntities: -end", sortedEntities)
     return (
-      <div>
+      <div class="red-zone">
         {sortedEntities.map((entity) => {
           return (
             <Accordion key={entity.createdAt}>
@@ -97,7 +96,7 @@ export default class Home extends Component {
                   <Card.Body>
                     <p>distance: {entity.distance}</p>
                     <p>chrono: {entity.chrono}</p>
-                    <p>text: {entity.text}</p>
+                    <p>Nombre de pas: {entity.text}</p>
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
@@ -123,8 +122,8 @@ export default class Home extends Component {
                   <Card.Title className="title_fullname">{user.fullName}</Card.Title>
                   {/*<Card.Title>ID: {user.id}</Card.Title>*/}
                   {this.getUserEntities(user.id)}
-                  <Button className="button_update" variant="warning">UPDATE</Button>
-                  <Button className="button_delete" variant="danger">DELETE</Button>
+                  <Button className="button_update" variant="info">UPDATE</Button>
+                  <Button className="button_delete" variant="info">DELETE</Button>
                 </Card.Body>
               </Card>
             )

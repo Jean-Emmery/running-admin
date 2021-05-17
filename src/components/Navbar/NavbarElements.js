@@ -30,7 +30,7 @@ export const NavLink = styled(Link)`
   font-weight: 400;
   font-family: "Raleway",sans-serif;
   &.active {
-    color: #ff364f !important;
+    color: #4374E6 !important;
   }
 `;
   
@@ -76,7 +76,7 @@ export const NavBtn = styled.nav`
   
 export const NavBtnLink = styled(Link)`
   border-radius: 4px;
-  background: #ff364f;
+  background: #4374E6;
   padding: 10px 22px;
   color: #fff;
   outline: none;
@@ -89,6 +89,6 @@ export const NavBtnLink = styled(Link)`
   &:hover {
     transition: all 0.2s ease-in-out;
     background: #fff;
-    color: #808080;
+    color: #fff;
   }
 `;
