@@ -27,6 +27,28 @@ export default class Home extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 
   }
+  
+  handleNameChange(event) {
+    if (event.target.value) {
+      this.setState({valueName: event.target.value});
+    }
+    else {
+      this.setState({valueName: "fullName"});
+    }
+  }
+  handleEmailChange(event) {
+    if (event.target.value) {
+      this.setState({valueEmail: event.target.value});
+    }
+    else {
+      this.setState({valueEmail: "email"});
+    }
+  }
+
+  handleSubmit(event) {
+    alert('Le nom a été soumis : ' + this.state.value);
+    event.preventDefault();
+  }
 
   setUsers(users) {
     this.setState({ users });
@@ -68,12 +90,19 @@ export default class Home extends Component {
     });
   }
   
+  // onDeleteCourse(id) {
+  //   var courseRef = db.collection('courses');
+  //   courseRef.doc(id).delete();
+  // }
+  
+
   getUserEntities(userId) {
     console.log("getUserEntities: -start")
     let entities = this.getEntities();
     let sortedEntities = [];
 // eslint-disable-next-line
     entities.map((entity) => {
+      console.log("data: " + entity.id);
       if (entity.userID === userId) {
         let userEntity = {};
         userEntity.createdAt = (new Date(entity.createdAt.seconds * 1000)).toLocaleDateString();
@@ -97,9 +126,10 @@ export default class Home extends Component {
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>
-                    <p>distance: {entity.distance}</p>
-                    <p>chrono: {entity.chrono}</p>
-                    <p>Nombre de pas: {entity.text}</p>
+                    <p className="textBodyCard">distance: {entity.distance}</p>
+                    <p className="textBodyCard">chrono: {entity.chrono}</p>
+                    <p className="textBodyCard">Nombre de pas: {entity.text}</p>
+                    <Button type="submit" className="button_delete" variant="info">DELETE&nbsp; <FaTrashAlt/></Button>
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
@@ -111,34 +141,13 @@ export default class Home extends Component {
     );
   }
 
-  handleNameChange(event) {
-    if (event.target.value) {
-      this.setState({valueName: event.target.value});
-    }
-    else {
-      this.setState({valueName: "fullName"});
-    }
-  }
-  handleEmailChange(event) {
-    if (event.target.value) {
-      this.setState({valueEmail: event.target.value});
-    }
-    else {
-      this.setState({valueEmail: "email"});
-    }
-  }
-
-  handleSubmit(event) {
-    alert('Le nom a été soumis : ' + this.state.value);
-    event.preventDefault();
-  }
 
   onUpdate(userId) {
 
     if (!userId || !this.state.valueEmail || !this.state.valueName) {
       return;
     }
-    if (this.state.valueEmail == "" || this.state.valueName == "") {
+    if (this.state.valueEmail === "" || this.state.valueName === "") {
       return ;
     }
     console.log("onUpdate: -userId: ", userId);

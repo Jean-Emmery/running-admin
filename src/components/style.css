@@ -58,6 +58,7 @@ body {
     height: 45px;
     display: flex !important;
     align-items: center !important;
+    background-color: red !important;
 }
 
 .accordion_title {
@@ -83,8 +84,9 @@ body {
 }
 
 .red-zone {
-    height: 230px;
+    height: 312px;
     overflow: auto; /* SCROLL BAR */
+    width: 100%;
 }
 
 body::-webkit-scrollbar {
@@ -134,4 +136,11 @@ body::-webkit-scrollbar {
 
 .card-body {
     text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.textBodyCard {
+    width: 100%;
 }
