@@ -4,22 +4,22 @@ import "firebase/auth";
 
 const db = firebase.firestore();
 
-class UserDataService {
-    getAll() {
-        return db;
-    }
+// class UserDataService {
+//     getAll() {
+//         return db;
+//     }
 
-    create(user) {
-        return db.add(user)
-    }
+//     create(user) {
+//         return db.add(user)
+//     }
 
-    update(id, value) {
-        return db.doc(id).update(value);
-    }
+//     update(id, value) {
+//         return db.doc(id).update(value);
+//     }
 
-    delete(id) {
-        return db.doc(id).delete();
-    }
-}
+//     delete(id) {
+//         return db.doc(id).delete();
+//     }
+// }
 
 export default db;

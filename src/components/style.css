@@ -8,6 +8,14 @@ body {
 .con-button {
     background-color: #4374E6 !important;
     border-color: whitesmoke !important;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button_dashboard {
+    height: 40px;
 }
 
 .btn-primary.focus, .btn-primary:focus {
@@ -36,15 +44,20 @@ body {
     display : flex;
     margin-top: 1%;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .button_update {
     margin-right: 5px;
-    margin-top: 4%;
+    height: 45px;
+    display: flex !important;
+    align-items: center !important;
 }
 
 .button_delete {
-    margin-top: 4%;
+    height: 45px;
+    display: flex !important;
+    align-items: center !important;
 }
 
 .accordion_title {
@@ -71,7 +84,7 @@ body {
 
 .red-zone {
     height: 230px;
-    overflow: auto;
+    overflow: auto; /* SCROLL BAR */
 }
 
 body::-webkit-scrollbar {
@@ -86,3 +99,39 @@ body::-webkit-scrollbar {
     background-color: darkgrey;
     outline: 1px solid slategrey;
   }
+
+  .form-courses {
+    margin-bottom: 5%;
+    height: 108px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .input-crud_first {
+      height: 45px;
+      width: 49%;
+      margin-right: 1%;
+  }
+
+  .input-crud_second {
+    height: 45px;
+    width: 49%;
+  }
+
+  .btn {
+    border-width: 2px !important;
+    border-style: outset !important;
+    border-color: white !important;
+    border-image: initial !important;
+  }
+
+  :focus-visible {
+    outline: #4374E6 !important
+}
+
+.card-body {
+    text-align: center;
+}

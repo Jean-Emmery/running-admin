@@ -36,7 +36,7 @@ export default function Dashboard() {
       </Card>
       <div className="dashboard-link">
       <div className="w-100 text-center mt-2 con-button">
-        <Button variant="link" onClick={handleLogout}>
+        <Button variant="link" className="button_dashboard" onClick={handleLogout}>
           Déconnexion
         </Button>
       </div>

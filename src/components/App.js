@@ -1,6 +1,5 @@
 import React from "react"
 import Signup from "./Signup"
-import { Container } from "react-bootstrap"
 import { AuthProvider } from "../contexts/AuthContext"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Dashboard from "./Dashboard"
@@ -10,8 +9,6 @@ import ForgotPassword from "./ForgotPassword"
 import UpdateProfile from "./UpdateProfile"
 import Home from "./Home"
 import Navbar from "../components/Navbar";
-
-import * as FireStoreService from '../services/firestore'
 
 function App() {
   return (

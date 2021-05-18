@@ -8,8 +8,6 @@ import {
   NavBtnLink,
 } from './NavbarElements';
 import "./style.css";
-import { Button } from "react-bootstrap";
-import handleLogout from '../Dashboard';
 
 const Navbar = () => {
   return (
