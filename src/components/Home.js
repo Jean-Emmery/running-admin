@@ -82,18 +82,24 @@ export default class Home extends Component {
 
   getEntitiesFromDb = () => {
     let me = this;
+    let result = [];
 
     const EntitiesCollection = db.collection('courses');
     EntitiesCollection.get().then((query) => {
-      const data = query.docs.map((doc) => doc.data());
-      me.setEntities(data);
+      query.docs.forEach((doc) => {
+        let finalItem = doc.data();
+        finalItem.id = doc.id;
+        result.push(finalItem);
+      });
+      me.setEntities(result);
     });
   }
   
-  // onDeleteCourse(id) {
-  //   var courseRef = db.collection('courses');
-  //   courseRef.doc(id).delete();
-  // }
+  async onDeleteCourse(id) {
+    console.log("id: ", id);
+    await db.collection('courses').doc(id).delete();
+    document.location.reload();
+  }
   
 
   getUserEntities(userId) {
@@ -109,6 +115,8 @@ export default class Home extends Component {
         userEntity.distance = entity.distance;
         userEntity.chrono = entity.timer;
         userEntity.text = entity.nombreDePas;
+        userEntity.id = entity.id;
+        console.log("userEntity.id: ", entity);
         sortedEntities.push(userEntity);
       }
     });
@@ -129,7 +137,7 @@ export default class Home extends Component {
                     <p className="textBodyCard">distance: {entity.distance}</p>
                     <p className="textBodyCard">chrono: {entity.chrono}</p>
                     <p className="textBodyCard">Nombre de pas: {entity.text}</p>
-                    <Button type="submit" className="button_delete" variant="info">DELETE&nbsp; <FaTrashAlt/></Button>
+                    <Button onClick={() => this.onDeleteCourse(entity.id)} type="" className="button_delete" variant="info">DELETE&nbsp; <FaTrashAlt/></Button>
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
