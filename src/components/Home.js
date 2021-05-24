@@ -102,7 +102,7 @@ export default class Home extends Component {
     let sortedEntities = [];
 // eslint-disable-next-line
     entities.map((entity) => {
-      console.log("data: " + entity.id);
+      //console.log("data: " + entity.userID);
       if (entity.userID === userId) {
         let userEntity = {};
         userEntity.createdAt = (new Date(entity.createdAt.seconds * 1000)).toLocaleDateString();
@@ -142,7 +142,7 @@ export default class Home extends Component {
   }
 
 
-  onUpdate(userId) {
+  async onUpdate(userId) {
 
     if (!userId || !this.state.valueEmail || !this.state.valueName) {
       return;
@@ -150,19 +150,22 @@ export default class Home extends Component {
     if (this.state.valueEmail === "" || this.state.valueName === "") {
       return ;
     }
-    console.log("onUpdate: -userId: ", userId);
+    console.log("onUpdate: -userId: ", userId, " valueEmail: ", this.state.valueEmail, " valueName: ", this.state.valueName);
 
     var userRef = db.collection('users');
-    userRef.doc(userId).update({
+    await userRef.doc(userId).update({
       email: this.state.valueEmail,
       fullName: this.state.valueName,
       id: userId,
     });
+    
+  document.location.reload();
   }
 
-  onDelete(userId) {
+  async onDelete(userId) {
     var userRef = db.collection('users');
-    userRef.doc(userId).delete();
+    await userRef.doc(userId).delete();
+    document.location.reload();
   }
 
   render() {
@@ -179,8 +182,8 @@ export default class Home extends Component {
                   <form className="form-courses">
                       <input className="input-crud_first" onChange={this.handleNameChange} type="text" placeholder="Changer le nom"/>
                       <input className="input-crud_second" onChange={this.handleEmailChange} type="email" placeholder="Changer l'email" />
-                    <Button type="submit" onClick={() => this.onUpdate(user.id)} className="button_update" variant="info">UPDATE&nbsp; <FaCheckSquare/></Button>
-                    <Button type="submit" onClick={() => this.onDelete(user.id)} className="button_delete" variant="info">DELETE&nbsp; <FaTrashAlt/></Button>
+                    <Button type="" onClick={() => this.onUpdate(user.id)} className="button_update" variant="info">UPDATE&nbsp; <FaCheckSquare/></Button>
+                    <Button type="" onClick={() => this.onDelete(user.id)} className="button_delete" variant="info">DELETE&nbsp; <FaTrashAlt/></Button>
                     {/* <input type="submit" value="Envoyer" /> */}
                   </form>
                   {/*<Card.Title>ID: {user.id}</Card.Title>*/}
