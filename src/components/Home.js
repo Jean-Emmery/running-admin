@@ -96,14 +96,12 @@ export default class Home extends Component {
   }
   
   async onDeleteCourse(id) {
-    console.log("id: ", id);
     await db.collection('courses').doc(id).delete();
     document.location.reload();
   }
   
 
   getUserEntities(userId) {
-    console.log("getUserEntities: -start")
     let entities = this.getEntities();
     let sortedEntities = [];
 // eslint-disable-next-line
@@ -116,7 +114,6 @@ export default class Home extends Component {
         userEntity.chrono = entity.timer;
         userEntity.text = entity.nombreDePas;
         userEntity.id = entity.id;
-        console.log("userEntity.id: ", entity);
         sortedEntities.push(userEntity);
       }
     });
@@ -133,7 +130,7 @@ export default class Home extends Component {
                   </Accordion.Toggle>
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
-                  <Card.Body>
+                  <Card.Body className="cardBody">
                     <p className="textBodyCard">distance: {entity.distance}</p>
                     <p className="textBodyCard">chrono: {entity.chrono}</p>
                     <p className="textBodyCard">Nombre de pas: {entity.text}</p>
@@ -158,8 +155,7 @@ export default class Home extends Component {
     if (this.state.valueEmail === "" || this.state.valueName === "") {
       return ;
     }
-    console.log("onUpdate: -userId: ", userId, " valueEmail: ", this.state.valueEmail, " valueName: ", this.state.valueName);
-
+  
     var userRef = db.collection('users');
     await userRef.doc(userId).update({
       email: this.state.valueEmail,
@@ -178,14 +174,13 @@ export default class Home extends Component {
 
   render() {
     let users = this.getUsers();
-    console.log("Render -start");
     return (
       <div className="list-row">
         {users &&
           users.map((user) => {
             return (
               <Card className="users-container" key={user.id}>
-                <Card.Body>
+                <Card.Body className="cardBody">
                   <Card.Title>{user.fullName} / {user.email}</Card.Title>
                   <form className="form-courses">
                       <input className="input-crud_first" onChange={this.handleNameChange} type="text" placeholder="Changer le nom"/>

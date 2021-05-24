@@ -134,7 +134,7 @@ body::-webkit-scrollbar {
     outline: #4374E6 !important
 }
 
-.card-body {
+.cardBody {
     text-align: center;
     display: flex;
     flex-wrap: wrap;
